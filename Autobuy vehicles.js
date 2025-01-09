@@ -119,6 +119,26 @@
         },
 
         {
+            buildingID: 9,
+            displayName: "Minimal",
+            vehicles:[
+                [39,2],   //GKW
+                [41,2],   //MzGW (FGr N)
+                [110,2],   //NEA50 (Anh)
+                [40,2],   //MTW-TZ
+                [45,1],   //MLW 5
+                [44,1],   //Anh DLE
+                [42,1],   //LKW K 9
+                [43,1],   //BRmG R
+                [100,1],   //MLW 4
+                [101,1],   //Anh SwPu
+                [123,1],   //LKW 7 Lbw (FGr WP)
+                [102,1],   //Anh 7
+                [109,1],   //MzGW SB
+            ]
+        },
+
+        {
             buildingID: 0,
             displayName: "Standardwache",
             vehicles:[
@@ -180,7 +200,7 @@
     {
         $("#vehicle_table")[0].before(wrapperDIV);
     }
-    
+
 
     for(let i = 0; i < vehicleConfigurations.length; i++){
         if(vehicleConfigurations[i].buildingID == buildingTypeID){
