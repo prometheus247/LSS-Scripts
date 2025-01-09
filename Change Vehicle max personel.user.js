@@ -14,14 +14,14 @@
     //Anleitung:
     // mit diesem Skript kann die maximale Personenanzahl für alle Fahrzeuge in einem Gebäude mit einem Knopfdruck geändert werden
 
-    // Füge dazu die Einträge im unten markierten Bereich ein 
+    // Füge dazu die Einträge im unten markierten Bereich ein
     // Beispiel:     [50,1],     Fahrzeuge mit der VehicleId 50 (GruKw) werden auf maximal eine Person gesetzt
     // Beispiel:     [50,2],[51,3],     Fahrzeuge mit der VehicleId 50 (GruKw) werden auf maximal 2 Personen gesetzt, Fahrzeuge mit der VehicleId 51 (FüKw) werden auf maximal 3 Personen gesetzt
 
     //Die bereits vorhandenen Einträge dienen als Beispiel und können rausgelöscht werden
-    
+
     var vehicleTypeIdToClassName = [
-    //---------------- Einträge unterhalb hiervon einfügen ----------------  
+    //---------------- Einträge unterhalb hiervon einfügen ----------------
         [35, 1],
         [50, 1],
         [72, 5],
@@ -30,8 +30,9 @@
         [81, 1],
         [82, 1],
         [94, 1],
+        [51, 1],
         [52, 1],
-    //---------------- Einträge oberhalb hiervon einfügen ----------------  
+    //---------------- Einträge oberhalb hiervon einfügen ----------------
     ];
 
 
@@ -57,8 +58,6 @@
         }
 
         $("#changeMaxPerson")[0].innerHTML = "Anzahl Personen wurden geändert";
-        window.location.reload();
-
     }
 
     function isVehicleIdInArray(vehId){
@@ -66,14 +65,23 @@
         if(result.length > 0){
             return result[0][1];
         }
+        return null;
     }
 
     function getVehicleTypeID(e){
         return e.getElementsByTagName("td")[0].getElementsByTagName("img")[0].getAttribute("vehicle_type_id");
     }
 
+    //function getVehicleID(e){
+    //    return e.getElementsByTagName("td")[1].getElementsByTagName("a")[0].getAttribute("href").replace(/[A-Za-z0-9]+/, "").replaceAll("/","");
+    //}
     function getVehicleID(e){
-        return e.getElementsByTagName("td")[1].getElementsByTagName("a")[0].getAttribute("href").replace(/[A-Za-z0-9]+/, "").replaceAll("/","");
+        var links = e.getElementsByTagName("a");
+        for(var n = 0; n < links.length; n++){
+            if(links[n].getAttribute("href") && Number.isFinite(parseInt(links[n].getAttribute("href").replace("/vehicles/","").trim()))){
+                return parseInt(links[n].getAttribute("href").replace("/vehicles/", ""));
+            }
+        }
     }
 
     function getCurMaxPer(e){
